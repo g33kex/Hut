@@ -1,0 +1,24 @@
+<div class="grid place-items-center gap-4">
+	<div class="flex gap-2">
+	<h1 class="pt-4 text-black text-2xl">Réservations Paillotte</h1>
+	</div>
+	<div>
+		<span class="text-base">Déjeuner</span>
+		<.form let={f} for={:lunch} phx_submit="save" class="mt-2 flex place-items-center items-center gap-2">
+		<%= text_input f, :name, placeholder: "Entrez votre nom", class: "bg-white border border-gray-300 rounded text-sm shadow-sm placeholder-gray-400 focus:border-pink-400 focus:ring-1 focus:ring-pink-400" %>
+		<%= submit "Réserver", class: "py-2 px-4 rounded-full text-base text-gray-900 bg-pink-400 hover:bg-pink-500 active:bg-pink-600"%>
+		</.form>
+	</div>
+	<div>
+		<span class="text-base">Dîner</span>
+		<.form let={f} for={:dinner} phx_submit="save" class="mt-1 flex place-items-center items-center gap-2">
+		<%= text_input f, :name, placeholder: "Entrez votre nom", class: "bg-white border border-gray-300 rounded text-sm shadow-sm placeholder-gray-400 focus:border-pink-400 focus:ring-1 focus:ring-pink-400" %>
+		<%= submit "Réserver", class: "py-2 px-4 rounded-full text-base text-gray-900 bg-pink-400 hover:bg-pink-500 active:bg-pink-600"%>
+		</.form>
+	</div>
+	<div draggable="true" ondragstart="event.preventDefault()">
+	<%= live_redirect to: Routes.live_path(@socket, HutWeb.Calendar) do %>
+		<button class="rounded-full py-2 px-6 text-base text-gray-900 bg-violet-400 hover:bg-violet-500 active:bg-violet-600">Retour</button>
+	<%end%>
+	</div>
+</div>
