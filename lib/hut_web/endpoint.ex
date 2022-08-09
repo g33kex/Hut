@@ -7,6 +7,7 @@ defmodule HutWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_hut_key",
+    max_age: 9999999999,
     signing_salt: "aSMgRQ8b"
   ]
 

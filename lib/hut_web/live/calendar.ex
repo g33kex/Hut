@@ -3,13 +3,14 @@ defmodule HutWeb.Calendar do
   use Timex
 
   alias HutWeb.CalendarView
-  alias HutWeb.Booking
 
-  def mount(_params, _session, socket) do
+  def mount(_params, %{"user_id" => user_id}, socket) do
+    IO.inspect(user_id, label: "USER_ID")
     current_date = Timex.today()
 
-    {:ok, assign(socket, current_date: current_date, day_names: day_names(), week_rows: week_rows(current_date))}
+    {:ok, assign(socket, current_date: current_date, day_names: day_names(), week_rows: week_rows(current_date), user_id: user_id)}
   end
+
 
   def handle_event("prev-month", _, socket) do
     current_date = Timex.shift(socket.assigns.current_date, months: -1)
@@ -20,10 +21,6 @@ defmodule HutWeb.Calendar do
     current_date = Timex.shift(socket.assigns.current_date, months: +1)
     {:noreply, assign(socket, current_date: current_date, day_names: day_names(), week_rows: week_rows(current_date))}
   end
-
-  #def handle_event("book", _, socket) do
-  #  {:noreply, push_patch(socket, to: Routes.live_path(socket, Booking))}
-  #end
 
   def handle_info({:updated_date, updated_date}, socket) do
     {:noreply, assign(socket, current_date: updated_date)}

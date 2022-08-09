@@ -8,6 +8,7 @@ defmodule HutWeb.Router do
     plug :put_root_layout, {HutWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :assign_user_id
   end
 
   pipeline :api do
@@ -18,7 +19,7 @@ defmodule HutWeb.Router do
     pipe_through :browser
 
     live("/", Calendar)
-    live("/book", Booking)
+    live("/book", Book)
   end
 
   # Other scopes may use custom stacks.
@@ -54,4 +55,13 @@ defmodule HutWeb.Router do
   #    forward "/mailbox", Plug.Swoosh.MailboxPreview
   #  end
   #end
+  #
+  defp assign_user_id(conn, _) do
+    if get_session(conn, :user_id) do
+      conn
+    else
+      user_id = Ecto.UUID.generate()
+      conn |> put_session(:user_id, user_id) 
+    end
+  end
 end

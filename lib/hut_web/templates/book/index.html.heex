@@ -8,6 +8,14 @@
 		<%= text_input f, :name, placeholder: "Entrez votre nom", class: "bg-white border border-gray-300 rounded text-sm shadow-sm placeholder-gray-400 focus:border-pink-400 focus:ring-1 focus:ring-pink-400" %>
 		<%= submit "Réserver", class: "py-2 px-4 rounded-full text-base text-gray-900 bg-pink-400 hover:bg-pink-500 active:bg-pink-600"%>
 		</.form>
+		<%= if Map.has_key?(@bookings, :lunch) do %>
+		<div class="mt-2 flex place-items-center items-center gap-2">
+			<span>
+				<%= @bookings.lunch %>
+			</span>
+			<button phx-click="cancel" phx-value-period="lunch" class="py-2 px-4 rounded-full text-base text-gray-900 bg-pink-400 hover:bg-pink-500 active:bg-pink-600">Annuler la réservation</button>
+		</div>
+		<% end %>
 	</div>
 	<div>
 		<span class="text-base">Dîner</span>
@@ -15,6 +23,14 @@
 		<%= text_input f, :name, placeholder: "Entrez votre nom", class: "bg-white border border-gray-300 rounded text-sm shadow-sm placeholder-gray-400 focus:border-pink-400 focus:ring-1 focus:ring-pink-400" %>
 		<%= submit "Réserver", class: "py-2 px-4 rounded-full text-base text-gray-900 bg-pink-400 hover:bg-pink-500 active:bg-pink-600"%>
 		</.form>
+		<%= if Map.has_key?(@bookings, :dinner) do %>
+		<div class="mt-2 flex place-items-center items-center gap-2">
+			<span>
+				<%= @bookings.dinner %>
+			</span>
+			<button phx-click="cancel" phx-value-period="dinner" class="py-2 px-4 rounded-full text-base text-gray-900 bg-pink-400 hover:bg-pink-500 active:bg-pink-600">Annuler la réservation</button>
+		</div>
+		<% end %>
 	</div>
 	<div draggable="true" ondragstart="event.preventDefault()">
 	<%= live_redirect to: Routes.live_path(@socket, HutWeb.Calendar) do %>
