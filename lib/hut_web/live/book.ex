@@ -44,7 +44,6 @@ defmodule HutWeb.Book do
   end
 
   def handle_info(%{topic: topic, event: "booking:updated", payload: new_state}, socket) do
-    IO.inspect(topic, label: "HANDLE EVENT")
     if topic(socket.assigns.date) == topic do
         {:noreply, assign(socket, bookings: new_state.bookings)}
     else

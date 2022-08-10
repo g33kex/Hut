@@ -1,6 +1,4 @@
 defmodule Hut.Booking do
-  use GenServer
-
   alias Hut.BookingSchema
   alias Hut.Repo
   alias Ecto.Changeset
@@ -23,8 +21,8 @@ defmodule Hut.Booking do
   def get_bookings(date) do
     query = from b in BookingSchema,
          where: b.date == ^date,
-         select: {b.name, b.period}
-    Repo.all(query) |> Enum.map(fn {k,v}->{v,k} end) |> Map.new
+         select: {b.period, b.name, b.user_id}
+    Repo.all(query) |> IO.inspect |> Enum.map(fn {period, name, user_id}->{period,%{name: name, user_id: user_id}} end) |> IO.inspect |> Map.new |> IO.inspect
   end
 
 end
