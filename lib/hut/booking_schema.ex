@@ -1,7 +1,6 @@
 defmodule Hut.BookingSchema do
   use Ecto.Schema
   import Ecto.Changeset
-  import Timex
 
   schema "bookings" do
     field :user_id, Ecto.UUID

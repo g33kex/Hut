@@ -1,7 +1,6 @@
 defmodule Hut.Booking do
   alias Hut.BookingSchema
   alias Hut.Repo
-  alias Ecto.Changeset
 
   import Ecto.Query
 

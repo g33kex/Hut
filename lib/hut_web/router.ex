@@ -15,7 +15,8 @@ defmodule HutWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/"<>Application.get_env(:hut, HutWeb.Endpoint)[:secret_path], HutWeb do
+  secret_path = Application.get_env(:hut, HutWeb.Endpoint)[:secret_path]
+  scope "/#{secret_path}", HutWeb do
     pipe_through :browser
 
     live("/", Calendar)
