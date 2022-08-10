@@ -13,11 +13,11 @@
 				<span class="w-[250px] overflow-hidden">
 					Réservé par <%= @bookings.lunch.name %>
 				</span>
-				<%= if @user_id == @bookings.lunch.user_id and @date >= Timex.today() do %>
+				<%= if @user_id == @bookings.lunch.user_id and Timex.compare(@date, Timex.today()) >= 0 do %>
 				<button phx-click="cancel" phx-value-period="lunch" class="w-[100px] py-2 px-4 rounded-full text-base text-gray-900 bg-pink-400 hover:bg-pink-500 active:bg-pink-600">Annuler</button>
 				<% end %>
 			</div>
-			<% @date >= Timex.today() -> %>
+			<% Timex.compare(@date, Timex.today()) >= 0 -> %>
 			<h2 class="text-lg font-medium">Déjeuner</h2>
 			<.form let={f} for={:lunch} phx_submit="save" class="mt-2 flex place-items-center items-center gap-2">
 			<%= text_input f, :name, placeholder: "Entrez votre nom", class: "w-[250px] bg-white border border-gray-300 rounded text-sm shadow-sm placeholder:italic placeholder-gray-400 focus:border-pink-400 focus:ring-1 focus:ring-pink-400" %>
@@ -34,11 +34,11 @@
 				<span class="w-[250px] overflow-hidden">
 					Réservé par <%= @bookings.dinner.name %>
 				</span>
-				<%= if @user_id == @bookings.dinner.user_id  and @date >= Timex.today() do %>
+				<%= if @user_id == @bookings.dinner.user_id  and Timex.compare(@date, Timex.today()) >= 0 do %>
 				<button phx-click="cancel" phx-value-period="dinner" class="w-[100px] py-2 px-4 rounded-full text-base text-gray-900 bg-pink-400 hover:bg-pink-500 active:bg-pink-600">Annuler</button>
 				<% end %>
 			</div>
-			<% @date >= Timex.today() -> %>
+			<% Timex.compare(@date, Timex.today()) >= 0 -> %>
 			<h2 class="text-lg font-medium">Dîner</h2>
 			<.form let={f} for={:dinner} phx_submit="save" class="mt-2 flex place-items-center items-center gap-2">
 			<%= text_input f, :name, placeholder: "Entrez votre nom", class: "w-[250px] bg-white border border-gray-300 rounded text-sm shadow-sm placeholder:italic placeholder-gray-400 focus:border-pink-400 focus:ring-1 focus:ring-pink-400" %>

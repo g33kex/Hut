@@ -13,7 +13,7 @@ defmodule Hut.Booking do
   end
 
   def cancel(user_id, date, period) do
-    if date >= Timex.today() do
+    if Timex.compare(date, Timex.today()) >= 0 do
       BookingSchema |> Repo.get_by(user_id: user_id, date: date, period: period) |> Repo.delete()
     end
   end 

@@ -16,7 +16,7 @@ defmodule Hut.BookingSchema do
     |> cast(attrs, [:user_id, :name, :date, :period])
     |> validate_required([:user_id, :name, :date, :period])
     |> validate_change(:date, fn :date, date ->
-      if date < Timex.today() do
+      if Timex.compare(date, Timex.today(), :day) == -1 do
         [date: "cannot be before today"]
       else
         []

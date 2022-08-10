@@ -27,6 +27,9 @@ defmodule HutWeb.Calendar do
 
   def handle_event("next-month", _, socket) do
     current_date = Timex.shift(socket.assigns.current_date, months: +1)
+    IO.inspect(current_date, label: "DEBUG")
+    IO.inspect(Timex.today(), label: "DEBUG")
+    IO.inspect(current_date<Timex.today(), label: "DEBUG")
     bookings = Booking.get_bookings(current_date)
     {:noreply, assign(socket, current_date: current_date, day_names: day_names(), week_rows: week_rows(current_date), bookings: bookings)}
   end

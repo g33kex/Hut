@@ -15,6 +15,12 @@ defmodule HutWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/", HutWeb do
+    pipe_through :browser
+
+    get "/", PageController, :index
+  end
+
   secret_path = Application.get_env(:hut, HutWeb.Endpoint)[:secret_path]
   scope "/#{secret_path}", HutWeb do
     pipe_through :browser
