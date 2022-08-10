@@ -15,6 +15,7 @@ config :hut, Hut.Repo,
 config :hut, HutWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "XW844ZLYb8pIQOhjXFIwSf+KIeP/S5VK0u7VyH3C8ZRAiQ5t+kdgPdcDQ41xtH7/",
+  secret_path: "iwai4Faiwu2vohY8eir5phoow4Ta1oo5uleesahhaebuu7ooshohSh3ae1tui4Ad",
   server: false
 
 # In test we don't send emails.

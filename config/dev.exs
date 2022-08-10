@@ -21,6 +21,7 @@ config :hut, HutWeb.Endpoint,
   code_reloader: true,
   debug_errors: true,
   secret_key_base: "jri4DJZsEYJb1BnWcZ9insnepL3fejdAsBKzgiQUleiYG77RH2SZdnBvg1zD3uyD",
+  secret_path: "iu5shohPhipi3ta7Wi5cuPh2gee0coo1agh2eiWoShah0foo8aaWiobaidusaghi",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},

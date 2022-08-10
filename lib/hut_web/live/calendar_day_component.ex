@@ -2,7 +2,6 @@ defmodule HutWeb.CalendarDayComponent do
   use Phoenix.LiveComponent
   use Timex
 
-  alias HutWeb.CalendarView
   alias Hut.Booking
 
   def update(assigns, socket) do
@@ -33,15 +32,15 @@ defmodule HutWeb.CalendarDayComponent do
           <%= Timex.format!(@day, "%d", :strftime) %>
         </button>
         <%= if not other_month?(@day, @current_date) do %>
-        <span class={ "w-2 h-2 rounded-full "<>indicator_class(@day, :lunch, @bookings, @user_id)}></span>
-        <span class={ "w-2 h-2 rounded-full "<>indicator_class(@day, :dinner, @bookings, @user_id)}></span>
+        <span class={ "w-2 h-2 rounded-full "<>indicator_class(:lunch, @bookings, @user_id)}></span>
+        <span class={ "w-2 h-2 rounded-full "<>indicator_class(:dinner, @bookings, @user_id)}></span>
         <% end %>
       </div>
     </td>
     """
   end
 
-  defp indicator_class(day, period, bookings, user_id) do
+  defp indicator_class(period, bookings, user_id) do
     cond do
       period == :lunch and Map.has_key?(bookings, :lunch) ->
         if bookings.lunch.user_id == user_id do
