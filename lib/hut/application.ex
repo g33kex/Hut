@@ -7,6 +7,9 @@ defmodule Hut.Application do
 
   @impl true
   def start(_type, _args) do
+    # Migrate database
+    Hut.Release.migrate()
+
     children = [
       # Start the Ecto repository
       Hut.Repo,
