@@ -3,27 +3,37 @@ defmodule HutWeb.Calendar do
   use Timex
 
   alias HutWeb.CalendarView
+  alias Hut.Booking
 
-  def mount(_params, %{"user_id" => user_id}, socket) do
-    IO.inspect(user_id, label: "USER_ID")
-    current_date = Timex.today()
+  def mount(%{"date" => sdate}, %{"user_id" => user_id}, socket) do
+    current_date = Timex.parse!(sdate, "{YYYY}-{M}-{D}") |> Timex.to_date
 
-    {:ok, assign(socket, current_date: current_date, day_names: day_names(), week_rows: week_rows(current_date), user_id: user_id)}
+    bookings = Booking.get_bookings(current_date)
+    {:ok, assign(socket, current_date: current_date, day_names: day_names(), week_rows: week_rows(current_date), user_id: user_id, bookings: bookings)}
   end
 
+  def mount(_params, %{"user_id" => user_id}, socket) do
+    current_date = Timex.today()
+
+    bookings = Booking.get_bookings(current_date)
+    {:ok, assign(socket, current_date: current_date, day_names: day_names(), week_rows: week_rows(current_date), user_id: user_id, bookings: bookings)}
+  end
 
   def handle_event("prev-month", _, socket) do
     current_date = Timex.shift(socket.assigns.current_date, months: -1)
-    {:noreply, assign(socket, current_date: current_date, day_names: day_names(), week_rows: week_rows(current_date))}
+    bookings = Booking.get_bookings(current_date)
+    {:noreply, assign(socket, current_date: current_date, day_names: day_names(), week_rows: week_rows(current_date), bookings: bookings)}
   end
 
   def handle_event("next-month", _, socket) do
     current_date = Timex.shift(socket.assigns.current_date, months: +1)
-    {:noreply, assign(socket, current_date: current_date, day_names: day_names(), week_rows: week_rows(current_date))}
+    bookings = Booking.get_bookings(current_date)
+    {:noreply, assign(socket, current_date: current_date, day_names: day_names(), week_rows: week_rows(current_date), bookings: bookings)}
   end
 
   def handle_info({:updated_date, updated_date}, socket) do
-    {:noreply, assign(socket, current_date: updated_date)}
+    bookings = Booking.get_bookings(updated_date)
+    {:noreply, assign(socket, current_date: updated_date, bookings: bookings)}
   end
 
   def render(assigns) do

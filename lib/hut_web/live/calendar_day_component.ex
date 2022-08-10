@@ -32,8 +32,10 @@ defmodule HutWeb.CalendarDayComponent do
         <button disabled={other_month?(@day, @current_date)} phx-click="pick-date" phx-target={@myself}  class={ "col-span-4 row-span-2 w-10 h-10 rounded-full whitespace-nowrap text-sm "<>day_class(@day, @current_date)}>
           <%= Timex.format!(@day, "%d", :strftime) %>
         </button>
+        <%= if not other_month?(@day, @current_date) do %>
         <span class={ "w-2 h-2 rounded-full "<>indicator_class(@day, :lunch, @bookings, @user_id)}></span>
         <span class={ "w-2 h-2 rounded-full "<>indicator_class(@day, :dinner, @bookings, @user_id)}></span>
+        <% end %>
       </div>
     </td>
     """
