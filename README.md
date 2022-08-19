@@ -6,9 +6,11 @@ The main view is a calendar view that allows picking a day to book a slot. It al
 
 ## Screenshots
 
-![calendar view](screenshots/calendar.png =400x400)
+![calendar view](screenshots/calendar.png) 
 
-![booking view](screenshots/booking.png =400x400)
+---
+
+![booking view](screenshots/booking.png)
 
 ## Running
 
