@@ -1,19 +1,22 @@
 # Hut
 
-To start your Phoenix server:
+I needed a web app to allow people from my building to book a shared kitchen area for lunch or dinner. I couldn't find such an app so I made one with the Phoenix framework and Tailwind CSS. This is my first web app so please forgive the inefficiencies. 
+ 
+The main view is a calendar view that allows picking a day to book a slot. It also shows slots that are already booked. The booking view allows to put down your name on a slot to book it or to cancel your booking. You cannot cancel other people's bookings because your booking is tied to your session cookie.
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+## Screenshots
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+![calendar view](screenshots/calendar.png =400x400)
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+![booking view](screenshots/booking.png =400x400)
 
-## Learn more
+## Running
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+Just as with any other Phoenix app, run:
+
+```
+mix deps.get
+mix compile
+mix ecto.setup
+mix phx.server
+```
